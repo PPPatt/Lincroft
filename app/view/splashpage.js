@@ -1,11 +1,12 @@
-//TODO Add splashpage placeholder
 //TODO Add real splashpage
 
+'use strict'
 import React, {Component} from 'react'
 import {Text, View} from 'react-native'
 
 const ReactRedux = require('react-redux')
 const store = require('../store')
+const actions = require('../actions')
 const Button = require('../reusables/button')
 
 class Splashpage extends Component {
@@ -31,16 +32,12 @@ const mapDispatchToProps = (dispatch) => {
   return{
     increment: () => {
       store.dispatch(
-        (dispatch, getState) => {
-          dispatch({type: 'increment'})
-        }
+        actions.increment()
       )
     },
     decrement: () => {
       store.dispatch(
-        (dispatch, getState) => {
-          dispatch({type: 'decrement'})
-        }
+        actions.decrement()
       )
     },
 
