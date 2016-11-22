@@ -7,6 +7,7 @@ module.exports = (currentstate, action) => {
     case C.ADD_PROJECTS:
       return {...action.projects, ...currentstate}
     case C.UPDATE_PROJECTS:
+      //FIXME: CHANGE TO DISPATCH ADD/DELETE ACTION
       return action.projects
     default: return currentstate|| initialstate.projects
   }
