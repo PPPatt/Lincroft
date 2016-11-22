@@ -17,11 +17,21 @@ module.exports = {
     let projects = firebase.database().ref('projects')
     projects.push(proj)
   },
+  deleteProject(projID, callback) {
+    let project = firebase.database().ref('projects/'+projID)
+    project.set(null)
+      .then(() => {
+        return project.once("value")
+      })
+      .then((snapshot) => {
+        callback()
+      })
+  },
   getProjectsFromServer(callback) {
     let projects = firebase.database().ref('projects')
-    return projects.once('value')
+    projects.once('value')
       .then((snapshot) => {
         callback(snapshot.val())
       })
-  }
+  },
 }

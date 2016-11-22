@@ -5,6 +5,8 @@ import {Provider, connect} from 'react-redux'
 const ReactRedux = require('react-redux')
 const store = require ('../store')
 const SplashPage = require('../view/splashpage')
+const Lobby = require('../view/lobby')
+const ProjectOverview = require('../view/projectoverview')
 
 class App extends Component {
   constructor(props) {
@@ -37,6 +39,10 @@ class App extends Component {
     switch(routeId) {
       case 'SplashPage':
         return (<SplashPage navigator={navigator}/>)
+      case 'Lobby':
+        return (<Lobby navigator={navigator}/>)
+      case 'ProjectOverview':
+        return (<ProjectOverview navigator={navigator} projID={route.projID}/>)
       default:
         return this.noRoute(route, navigator)
     }
