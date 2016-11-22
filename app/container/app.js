@@ -36,7 +36,6 @@ class App extends Component {
     let routeId = route.id
     switch(routeId) {
       case 'SplashPage':
-        //maybe some unmounting in here??
         return (<SplashPage navigator={navigator}/>)
       default:
         return this.noRoute(route, navigator)

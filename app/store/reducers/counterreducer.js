@@ -4,13 +4,14 @@ const C = require('../../constants')
 
 
 module.exports = (currentState, action) => {
+  let middleState
   switch(action.type) {
     case C.INCREMENT:
-      let middleState = currentState
+      middleState = currentState
       middleState++
       return middleState
     case C.DECREMENT:
-      let middleState = currentState
+      middleState = currentState
       middleState--
       return middleState
     default:
