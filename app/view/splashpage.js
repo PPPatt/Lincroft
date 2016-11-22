@@ -12,21 +12,18 @@ const Button = require('../reusables/button')
 class Splashpage extends Component {
   constructor(props) {
     super(props)
-    //NOTE: used mapStateToProps instead of subscribing to the whole store
-    // this.state = {
-    //   store: store.getState()
-    // }
-    // store.subscribe(()=>{
-    //   this.setState({store: store.getState()}),
-    //   console.log('updated')
-    // })
   }
   render() {
+    let testProjects = [
+      {title: 'someTitle', config: {someKey: 'someValue'}},
+      {title: 'someOtherTitle', config: {someOtherKey: 'someOtherValue'}}
+    ]
     return(
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
         <Text>counter: {this.props.counter}</Text>
         <Button onPress={()=>this.props.increment()}>Increment</Button>
         <Button onPress={()=>this.props.decrement()}>Decrement</Button>
+        <Button onPress={()=>this.props.addProjects(testProjects)}>Add Test Project</Button>
       </View>
     )
   }
@@ -48,7 +45,11 @@ const mapDispatchToProps = (dispatch) => {
         actions.decrement()
       )
     },
-
+    addProjects: (projects) => {
+      store.dispatch(
+        actions.addProjects(projects)
+      )
+    }
   }
 }
 

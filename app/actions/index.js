@@ -1,4 +1,5 @@
 'use strict'
-const counterActions= require('./counterActions')
+const counterActions = require('./counterActions')
+const projectsActions = require('./projectsActions')
 
-module.exports = Object.assign({}, counterActions)
+module.exports = Object.assign({}, counterActions, projectsActions)

@@ -3,7 +3,7 @@ const initialstate = require('../initialstate')
 const C = require('../../constants')
 
 
-module.exports = (currentState, action)=> {
+module.exports = (currentState, action) => {
   switch(action.type) {
     case C.INCREMENT:
       var middleState = currentState
