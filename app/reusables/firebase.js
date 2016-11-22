@@ -13,6 +13,14 @@ const config = {
 firebase.initializeApp(config)
 
 module.exports = {
+  getProjects() {
+    return firebase.database().ref('projects').once('value')
+  },
+  listenToProjects(callback) {
+    firebase.database().ref('projects').on('value',
+      ()=>{callback()}
+    )
+  },
   addProject(proj) {
     let projects = firebase.database().ref('projects')
     projects.push(proj)
@@ -26,6 +34,7 @@ module.exports = {
       .then((snapshot) => {
         callback()
       })
+      .catch((e)=>console.warn(e))
   },
   getProjectsFromServer(callback) {
     let projects = firebase.database().ref('projects')
