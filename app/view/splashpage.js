@@ -11,11 +11,6 @@ const Button = require('../reusables/button')
 const firebase = require('../reusables/firebase')
 
 class Splashpage extends Component {
-
-  componentWillMount() {
-    firebase.getProjectsFromServer(this.props.addProjects.bind(this))
-  }
-
   render() {
     let testProject = {
       properties: {title: 'someTitle'}, someKey: 'someValue'
@@ -26,7 +21,7 @@ class Splashpage extends Component {
         <Text>counter: {this.props.counter}</Text>
         <Button onPress={()=>this.props.increment()}>Increment</Button>
         <Button onPress={()=>this.props.decrement()}>Decrement</Button>
-        <Button onPress={()=>this.props.addProjects(testProjects)}>Add Test Project</Button>
+        <Button onPress={()=>this.props.updateProjects()}>update Projects</Button>
         <Button onPress={()=>firebase.addProject(testProject)}>Firebase Add</Button>
         <Button onPress={()=>{firebase.getProjectsFromServer(this.props.addProjects.bind(this))}}>Firebase get and Import</Button>
         <Button onPress={()=>this.props.navigator.push({id:'Lobby'})}>goto Lobby</Button>
@@ -56,7 +51,12 @@ const mapDispatchToProps = (dispatch) => {
       store.dispatch(
         actions.addProjects(projects)
       )
-    }
+    },
+    updateProjects: () => {
+      store.dispatch(
+        actions.updateProjects()
+      )
+    },
   }
 }
 
