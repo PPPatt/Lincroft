@@ -4,9 +4,11 @@ import {Navigator, View, Text, TouchableOpacity} from 'react-native'
 import {Provider, connect} from 'react-redux'
 const ReactRedux = require('react-redux')
 const store = require ('../store')
+const actions = require('../actions')
 const SplashPage = require('../view/splashpage')
 const Lobby = require('../view/lobby')
 const ProjectOverview = require('../view/projectoverview')
+const firebase = require('../reusables/firebase')
 
 class App extends Component {
   constructor(props) {
@@ -15,6 +17,10 @@ class App extends Component {
     store.subscribe(()=>{
       this.setState({store: store.getState()})
     })
+  }
+
+  componentWillMount() {
+    firebase.listenToProjects(()=>store.dispatch(actions.updateProjects()))
   }
 
   render() {
