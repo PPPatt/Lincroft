@@ -1,7 +1,6 @@
 'use strict'
-var C = require('../../constants')
-var initialstate = require("../initialstate")
-//var extras = require('../../components/extras')
+const C = require('../../constants')
+const initialstate = require("../initialstate")
 
 module.exports = (currentstate, action) => {
   switch(action.type) {

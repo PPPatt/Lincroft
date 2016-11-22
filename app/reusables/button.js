@@ -22,7 +22,7 @@ class Button extends React.Component {
   }
 
   render() {
-    var colorStyle = { color: this.state.active ? '#fff' : '#000' }
+    let colorStyle = { color: this.state.active ? '#fff' : '#000' }
     return (
       <TouchableHighlight
         onHideUnderlay={this._onUnhighlight}
@@ -43,7 +43,7 @@ Button.propTypes = {
 
 module.exports = Button
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   button: {
     borderRadius: 5,
     flex: 1,

@@ -2,19 +2,9 @@
 import React, {Component} from 'react'
 import {Navigator, View, Text, TouchableOpacity} from 'react-native'
 import {Provider, connect} from 'react-redux'
-var ReactRedux = require('react-redux')
-var store = require ('../store')
-var SplashPage = require('../view/splashpage')
-
-/*
-var Home = require('../components/Home')
-var Lobby = require('../components/Lobby')
-var AddProject = require('../components/AddProject')
-var ProjectLevel = require('../components/ProjectLevel')
-var AddFunction = require('../components/AddFunction')
-var ProjectOverview = require('../components/ProjectOverview')
-var AnQs = require('../components/AnQs')
-*/
+const ReactRedux = require('react-redux')
+const store = require ('../store')
+const SplashPage = require('../view/splashpage')
 
 class App extends Component {
   constructor(props) {
@@ -43,35 +33,11 @@ class App extends Component {
   }
 
   renderScene(route,navigator) {
-    var routeId = route.id
+    let routeId = route.id
     switch(routeId) {
       case 'SplashPage':
         //maybe some unmounting in here??
         return (<SplashPage navigator={navigator}/>)
-      case 'Home':
-        return (<Home navigator={navigator}/>)
-      case 'Lobby':
-        return(<Lobby navigator={navigator}/>)
-      case 'AddProject':
-        return(<AddProject navigator={navigator}/>)
-      case 'ProjectLevel':
-        return(<ProjectLevel navigator={navigator} projID={route.projID} fuID={route.fuID}/>)
-      case 'AnQs':
-        return(<AnQs navigator={navigator}/>)
-      case 'AddFunction':
-        return(
-          <AddFunction
-            navigator={navigator}
-            projID={route.projID}
-            prevFuID={route.prevFuID}
-            optionID={route.optionID}
-            newFuName={route.newFuName}/>
-        )
-      case 'ProjectOverview':
-        return(
-          <ProjectOverview navigator={navigator}
-            projID={route.projID}
-            fuID={route.fuID}/>)
       default:
         return this.noRoute(route, navigator)
     }
