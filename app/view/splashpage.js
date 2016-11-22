@@ -12,20 +12,28 @@ const Button = require('../reusables/button')
 class Splashpage extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      store: store.getState()
-    }
-    store.subscribe(()=>this.setState({store: store.getState()}))
+    //NOTE: used mapStateToProps instead of subscribing to the whole store
+    // this.state = {
+    //   store: store.getState()
+    // }
+    // store.subscribe(()=>{
+    //   this.setState({store: store.getState()}),
+    //   console.log('updated')
+    // })
   }
   render() {
     return(
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
-        <Text>counter: {this.state.store.counter}</Text>
+        <Text>counter: {this.props.counter}</Text>
         <Button onPress={()=>this.props.increment()}>Increment</Button>
         <Button onPress={()=>this.props.decrement()}>Decrement</Button>
       </View>
     )
   }
+}
+
+const mapStateToProps = (state) => {
+  return {counter: state.counter}
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -44,4 +52,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-module.exports = ReactRedux.connect(mapDispatchToProps)(Splashpage)
+module.exports = ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Splashpage)
