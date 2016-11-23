@@ -12,9 +12,8 @@ class Lobby extends Component{
     return(
       <ViewContainer title='Lobby' rightButton={true} buttonTitle='add' onPressRight={()=>{this.onNavbarRightPressed()}} back={()=>this.props.navigator.pop()}>
           <ProjectList
-            onPress={(rowData, rowID)=>{
-              //this.props.evaluateProject(rowID),
-              this.props.navigator.push({id:'ProjectOverview', projID: rowID})
+            onPress={(rowData)=>{
+              this.props.navigator.push({id:'ProjectOverview', projID: rowData.id})
             }}/>
       </ViewContainer>
     )

@@ -25,17 +25,17 @@ class ProjectList extends Component {
     return(
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={(rowData, sectionID, rowID)=>this.renderRow(rowData, sectionID, rowID)}
+          renderRow={(rowData)=>this.renderRow(rowData)}
           enableEmptySections={true}
         />
     )
   }
 
-  renderRow(rowData, sectionID, rowID) {
+  renderRow(rowData) {
 
     return (
       <View>
-        <TouchableOpacity onPress={()=>this.props.onPress(rowData, rowID)}>
+        <TouchableOpacity onPress={()=>this.props.onPress(rowData)}>
           <View style={{height: 10}}/>
           <View style={{flexDirection: 'row'}}>
             <View style = {{width:15}}/>

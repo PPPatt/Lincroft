@@ -11,11 +11,16 @@ const store = require('../store')
 
 class ProjectOverview extends Component {
   _onNavbarRightPressed() {
-    firebase.deleteProject(this.props.projID, this.callback.bind(this))
+    this.props.navigator.pop()
+    firebase.deleteProject(this.props.project.id)
   }
 
   callback() {
     this.props.navigator.pop()
+  }
+
+  shouldComponentUpdate() { //FIXME: temporary fix to prevent warning when open project is being deleted
+    return false
   }
 
   render() {
@@ -35,7 +40,7 @@ class ProjectOverview extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {project: state.projects[ownProps.projID]}
+  return {project: state.projects.find((project)=>project.id===ownProps.projID)}
 }
 
 const mapDispatchToProps = (dispatch) => {
