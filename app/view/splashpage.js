@@ -1,5 +1,3 @@
-//TODO Add real splashpage
-
 'use strict'
 import React, {Component} from 'react'
 import {Text, View} from 'react-native'
