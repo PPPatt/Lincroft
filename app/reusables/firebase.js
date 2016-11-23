@@ -32,15 +32,8 @@ module.exports = {
         return project.once("value")
       })
       .then((snapshot) => {
-        callback()
+        if(callback) {callback()}
       })
       .catch((e)=>console.warn(e))
-  },
-  getProjectsFromServer(callback) {
-    let projects = firebase.database().ref('projects')
-    projects.once('value')
-      .then((snapshot) => {
-        callback(snapshot.val())
-      })
   },
 }

@@ -21,7 +21,6 @@ class Splashpage extends Component {
         <Button onPress={()=>this.props.decrement()}>Decrement</Button>
         <Button onPress={()=>this.props.updateProjects()}>update Projects</Button>
         <Button onPress={()=>firebase.addProject(testProject)}>Firebase Add</Button>
-        <Button onPress={()=>{firebase.getProjectsFromServer(this.props.addProjects.bind(this))}}>Firebase get and Import</Button>
         <Button onPress={()=>this.props.navigator.push({id:'Lobby'})}>goto Lobby</Button>
         <Text>auto get Projects from Server</Text>
       </View>
