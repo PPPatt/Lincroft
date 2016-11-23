@@ -11,7 +11,14 @@ const firebase = require('../reusables/firebase')
 class Splashpage extends Component {
   render() {
     let testProject = {
-      properties: {title: 'someTitle'}, someKey: 'someValue'
+      properties: {
+        title: 'some Title',
+        members: [
+          {id: 'someUser'},
+          {id: 'someOtherUser'}
+        ],
+      },
+      someKey: 'someValue',
     }
 
     return(
