@@ -6,6 +6,7 @@ import {View, Text} from 'react-native'
 const ReactRedux = require('react-redux')
 const firebase = require('../reusables/firebase')
 const ViewContainer = require('../reusables/viewcontainer')
+const Button = require('../reusables/button')
 const actions = require('../actions')
 const store = require('../store')
 
@@ -30,10 +31,19 @@ class ProjectOverview extends Component {
         rightButton={true}
         buttonTitle='delete'
         onPressRight={()=>{this._onNavbarRightPressed()}}
-        back={()=>this.props.navigator.pop()
-        }>
-
-      <Text>hi from ProjectOverview</Text>
+        back={()=>this.props.navigator.pop()}
+        style={{alignItems:'center'}}
+        >
+        <Text style={{margin: 15}}>Title: {this.props.project.properties.title}</Text>
+        <Text>Members: {
+          this.props.project.properties.members?
+            this.props.project.properties.members.map((e)=>e.id).join(', '):
+            'no Members declared'}
+        </Text>
+        <View style={{flex:3}}/>
+        <Button onPress={()=>{this.props.navigator.push({id:'ProjectLogic', projID:this.props.projID})}}>
+          Show Logic
+        </Button>
       </ViewContainer>
     )
   }
