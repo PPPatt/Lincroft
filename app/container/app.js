@@ -8,6 +8,7 @@ const actions = require('../actions')
 const SplashPage = require('../view/splashpage')
 const Lobby = require('../view/lobby')
 const ProjectOverview = require('../view/projectoverview')
+const ProjectLogic = require('../view/projectlogic')
 const firebase = require('../reusables/firebase')
 
 class App extends Component {
@@ -49,6 +50,8 @@ class App extends Component {
         return (<Lobby navigator={navigator}/>)
       case 'ProjectOverview':
         return (<ProjectOverview navigator={navigator} projID={route.projID}/>)
+      case 'ProjectLogic':
+        return (<ProjectLogic navigator={navigator} projID={route.projID}/>)
       default:
         return this.noRoute(route, navigator)
     }
