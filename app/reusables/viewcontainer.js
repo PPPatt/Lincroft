@@ -5,7 +5,7 @@ const Button = require('./button')
 class ViewContainer extends React.Component{
   render() {
     return(
-      <View style={{flex:1, backgroundColor: 'lightgrey'}}>
+      <View style={[{flex:1, backgroundColor: 'lightgrey'}, this.props.style]}>
         <View style={{height: 60, backgroundColor: 'grey', flexDirection: 'row'}}>
           <Button
             onPress={this.props.back!==undefined?this.props.back:()=>console.log('add prop "back={this.props.navigator.pop()} to ViewContainer', this.props.back)}
