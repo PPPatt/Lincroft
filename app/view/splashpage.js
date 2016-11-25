@@ -12,13 +12,46 @@ class Splashpage extends Component {
   render() {
     let testProject = {
       properties: {
-        title: 'some Title',
+        title: 'Triplecheck Time',
         members: [
-          {id: 'someUser'},
-          {id: 'someOtherUser'}
+          {id: 'VerrückterUhrmacher'},
+          {id: 'Momo'},
+          {id: 'Slowmobius'}
         ],
       },
-      someKey: 'someValue',
+      logic: [
+        {
+          type: 'deadline',
+          status: 'inProgress', //'sucsessfull', 'failed', 'needsEditing?'
+          config: {
+            deadline: 1800, //FIXME: ADD ACTUAL TIME FORMAT
+          },
+          result: [
+            {textOutput: 'we are good on Time', action: 1},
+            {textOutput: 'lets doublecheck:(', action: 2}
+          ],
+        }, { //NOTE: TEMPORARY SECOND LVL
+          type: 'deadline',
+          status: 'inProgress', //'sucsessfull', 'failed', 'needsEditing?'
+          config: {
+            deadline: 1730, //FIXME: ADD ACTUAL TIME FORMAT
+          },
+          result: [
+            {textOutput: 'we are really good on Time', action: 'resolve'},
+            {textOutput: 'sadly we are out of Time', action: 'archive'}
+          ],
+        }, { //NOTE: TEMPORARY SECOND LVL
+          type: 'deadline',
+          status: 'inProgress', //'sucsessfull', 'failed', 'needsEditing?'
+          config: {
+            deadline: 1800, //FIXME: ADD ACTUAL TIME FORMAT
+          },
+          result: [
+            {textOutput: 'we are actually really good on Time', action: 'resolve'},
+            {textOutput: 'sadly we are actually really out of Time', action: 'archive'}
+          ],
+        },
+      ],
     }
 
     return(
