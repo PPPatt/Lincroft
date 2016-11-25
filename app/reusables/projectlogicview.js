@@ -1,23 +1,3 @@
-/*
-  render() {
-    renderLogic() {
-      iterateLayers(funcID) {
-        addLogicLayer () {
-          renderFunction()
-          forloop(
-            renderOption()
-            checkForNextFuOnPath(path)
-          )
-        }
-        nextFu?iterateLayers(nextFu)
-      }
-    }
-  }
-
-
-
-
-*/
 'use strict'
 console.ignoredYellowBox = ['Warning: Failed prop type: Invalid props.style key']
 import React, {Component} from 'react'
