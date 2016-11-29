@@ -10,6 +10,7 @@ module.exports = {
       })
     }
   },
+
   updateProjects: () => {
     return (dispatch, getState) => {
       firebase.getProjects()
@@ -35,6 +36,18 @@ module.exports = {
           } else {throw('no changes')}
         })
         .catch((e)=>console.warn('error in updateProjects: '+e))
+    }
+  },
+
+  addFunctionToProject: (projID, func, funcID, opID) => {
+    return (dispatch, getState) => {
+      dispatch({
+        type: C.ADD_FUNCTION_TO_PROJECT,
+        projID,
+        func,
+        funcID,
+        opID
+      })
     }
   }
 }
