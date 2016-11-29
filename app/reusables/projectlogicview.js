@@ -11,7 +11,7 @@ const ViewContainer = require('./viewcontainer')
 const functionView = require('../components/functionView')
 const optionRowView = require('../components/optionRowView')
 const Modal = require('../reusables/modal')
-const Button = require('../reusables/button')
+const AddFunction = require('../view/addfunction')
 
 class ProjectLogicView extends Component {
   constructor(props) {
@@ -60,19 +60,8 @@ class ProjectLogicView extends Component {
     this.setState({currentPath: newPath})
   }
 
-  addFunction() {
-    let placeholderFunction = {
-      type: 'deadline',
-      status: 'inProgress',
-      config: {
-        deadline: 1800, //FIXME: ADD ACTUAL TIME FORMAT
-      },
-      result: [
-        {textOutput: 'yuhu, added a func, and we are in time', action: 'resolve'},
-        {textOutput: 'bummer, added a function but we are out of time', action: 'archive'}
-      ],
-    }
-    this.props.addFunctionToProject(this.props.projID, placeholderFunction, this.state.modalProps.funcID, this.state.modalProps.opID)
+  addFunction(func) {
+    this.props.addFunctionToProject(this.props.projID, func, this.state.modalProps.funcID, this.state.modalProps.opID)
     this.updatePathTree()
   }
 
@@ -82,13 +71,12 @@ class ProjectLogicView extends Component {
       <ScrollView style={styles.outerBorder}>
         {this.state.ModalVisible_AddFunction?
           <Modal switchVisible={()=>{this.switchVisible()}}>
-            <Button onPress={()=>{
-              this.addFunction()
-              this.switchVisible()
-              this.setPath(this.state.modalProps.pathLvl, this.state.modalProps.opID)
-            }}>
-              add placeholder
-            </Button>
+            <AddFunction
+              submitToState={(func)=>{
+                  this.addFunction(func)
+                  this.switchVisible()
+                  this.setPath(this.state.modalProps.pathLvl, this.state.modalProps.opID)
+              }}/>
           </Modal>:
           null}
         {logic?

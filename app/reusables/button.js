@@ -22,9 +22,13 @@ class Button extends React.Component {
   }
 
   render() {
-    let colorStyle = { color: this.state.active ? '#fff' : '#000' }
+    let colorStyle
+    if(this.props.disabled) {
+      colorStyle = {color: 'lightgrey'}
+    } else {colorStyle = { color: this.state.active ? '#fff' : '#000' }}
     return (
       <TouchableHighlight
+        disabled = {this.props.disabled||false} {/*FIXME: kind of dirty but does the job*/}
         onHideUnderlay={this._onUnhighlight}
         onPress={this._onPress}
         onShowUnderlay={this._onHighlight}
@@ -53,6 +57,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   buttonText: {
+    opacity: 1,
     fontSize: 18,
     margin: 5,
     textAlign: 'center',
