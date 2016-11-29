@@ -11,8 +11,13 @@ module.exports = (currentstate, action) => {
     case C.ADD_FUNCTION_TO_PROJECT: //NOTE: non reversible with remote devtools
       let middlestate = currentstate
       let id = currentstate.findIndex((p)=>p.id===action.projID)
-      middlestate[id].logic[action.funcID].result[action.opID].action = middlestate[id].logic.length
-      middlestate[id].logic.push(action.func)
+      if(middlestate[id].logic) {
+        middlestate[id].logic[action.funcID].result[action.opID].action = middlestate[id].logic.length
+        middlestate[id].logic.push(action.func)
+      } else {
+        middlestate[id].logic = []
+        middlestate[id].logic.push(action.func)
+      }
       return middlestate
     default: return currentstate|| initialstate.projects
   }
