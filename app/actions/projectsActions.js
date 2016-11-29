@@ -33,7 +33,7 @@ module.exports = {
               type:C.DELETE_PROJECTS,
               projIDs: diffKeysDel
             })
-          } else {throw('no changes')}
+          } else {/*eather no diffs to server or just deep diffs*/}
         })
         .catch((e)=>console.warn('error in updateProjects: '+e))
     }
