@@ -28,7 +28,7 @@ class Button extends React.Component {
     } else {colorStyle = { color: this.state.active ? '#fff' : '#000' }}
     return (
       <TouchableHighlight
-        disabled = {this.props.disabled||false} {/*FIXME: kind of dirty but does the job*/}
+        disabled = {this.props.disabled||false} //FIXME: kind of dirty but does the job
         onHideUnderlay={this._onUnhighlight}
         onPress={this._onPress}
         onShowUnderlay={this._onHighlight}
