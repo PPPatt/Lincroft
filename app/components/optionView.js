@@ -5,6 +5,22 @@ const styles = require('../reusables/styles')
 
 module.exports = (props, op, opID, pathLvl, opType) => {
   switch (opType) {
+    case 'initial':
+      return(
+        <View
+          key={0}
+          style={{flex: 1, alignItemsHorizontal: 'center', flexDirection: 'row'}}>
+          <TouchableOpacity
+            style={styles.optionViewDeadEnd}
+            onPress={()=>{
+              props.setModalProps({funcID: props.funcID, opID, pathLvl})
+              props.switchVisible()
+            }}>
+            <Text style={{textAlign: 'center'}}>Add new Function</Text>
+          </TouchableOpacity>
+        </View>
+      )
+      break
     case 'selected':
       return(
         <View
