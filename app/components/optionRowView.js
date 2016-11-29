@@ -13,8 +13,9 @@ module.exports = (props, options, pathLvl) => {
       getOptionType(
         opID,
         options,
-        {opID, pathLvl, path: props.path}
-      )
+        {opID, pathLvl, selectedPath: props.selectedPath}
+      ),
+      isLogic(props.logicPath, props.selectedPath, opID, pathLvl)
     ))
   }
   return (
@@ -26,9 +27,9 @@ module.exports = (props, options, pathLvl) => {
   )
 }
 
-const isSelected = ({opID, pathLvl, path}) => {
-  if(path[pathLvl]) {
-    if (path[pathLvl].toString()===opID.toString()) {
+const isSelected = ({opID, pathLvl, selectedPath}) => {
+  if(selectedPath[pathLvl]!==undefined && selectedPath[pathLvl]!==null) {
+    if (selectedPath[pathLvl].toString()===opID.toString()) {
       return true
     } else {return false}
   } else {return false}
@@ -44,5 +45,21 @@ const getOptionType = (opID, options, isSelectedArgs) => {
     }
   } else {
     return 'deadend'
+  }
+}
+
+const isLogic = (logicPath, selectedPath, opID, pathLvl) => {
+  if(logicPath[0]) {
+    let tempSelectedPath = selectedPath.slice(0, pathLvl).concat([opID])
+    let onLogicStreet = () => {
+      for(let i = 0; i<pathLvl+1; i++) {
+        if(tempSelectedPath[i].toString()===logicPath[i].toString()) {
+          if(i===pathLvl) {
+            return true
+          }
+        } else {break}
+      } return false
+    }
+    return onLogicStreet()
   }
 }

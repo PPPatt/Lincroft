@@ -3,7 +3,7 @@ import React from 'react'
 import {TouchableOpacity, View, Text} from 'react-native'
 const styles = require('../reusables/styles')
 
-module.exports = (props, op, opID, pathLvl, opType) => {
+module.exports = (props, op, opID, pathLvl, opType, isLogic = false) => {
   switch (opType) {
     case 'initial':
       return(
@@ -30,7 +30,7 @@ module.exports = (props, op, opID, pathLvl, opType) => {
             style={styles.optionViewSucsess}
             onPress={()=>{props.setPath(pathLvl, null)}}>
             <Text>{op.textOutput}</Text>
-            <Text>{props.funcID}</Text>
+            {isLogic?<Text style={{fontSize:25, textAlign: 'center'}}>V</Text>:null}
           </TouchableOpacity>
         </View>
       )
@@ -44,7 +44,7 @@ module.exports = (props, op, opID, pathLvl, opType) => {
             style={styles.optionViewFail}
             onPress={()=>{props.setPath(pathLvl, opID)}}>
             <Text>{op.textOutput}</Text>
-            <Text>{props.funcID}</Text>
+            {isLogic?<Text style={{fontSize:25, textAlign: 'center'}}>V</Text>:null}
           </TouchableOpacity>
         </View>
       )
@@ -61,7 +61,7 @@ module.exports = (props, op, opID, pathLvl, opType) => {
               props.switchVisible()
             }}>
             <Text>{op.textOutput}</Text>
-            <Text>{props.funcID}</Text>
+            {isLogic?<Text style={{fontSize:25, textAlign: 'center'}}>V</Text>:null}
           </TouchableOpacity>
         </View>
       )

@@ -10,7 +10,10 @@ module.exports = (props, fu, funcID) => {
         <View style={styles.pic}/>
         <View style={styles.innerContainer}>
           <Text>{fu.title?fu.title:'‘no title‘'}</Text>
-          <Text>{fu.type}</Text>
+          <Text>Type: {fu.type}</Text>
+          {fu.type==='deadline'?
+            <Text>Deadline: {fu.config.deadline}</Text>:
+            null}
         </View>
       </View>
     </TouchableOpacity>
