@@ -41,8 +41,10 @@ module.exports = (props, op, opID, pathLvl, opType) => {
           <TouchableOpacity
             style={styles.optionViewDeadEnd}
             onPress={()=>{
-              props.addFunction(props.funcID, opID)
-              props.setPath(pathLvl, opID)
+              props.setModalProps({funcID: props.funcID, opID, pathLvl})
+              props.switchVisible()
+              // props.addFunction(props.funcID, opID)
+              // props.setPath(pathLvl, opID)
             }}>
             <Text>{op.textOutput}</Text>
             <Text>{props.funcID}</Text>

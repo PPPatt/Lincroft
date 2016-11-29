@@ -34,8 +34,7 @@ class MyModal extends React.Component{
           <View style={[styles.innerContainer, innerContainerTransparentStyle]}>
             {this.props.children}
             <Button
-              onPress={this.props.switchVisible}
-              style={styles.modalButton}>
+              onPress={this.props.switchVisible}>
               Close
             </Button>
           </View>

@@ -6,7 +6,16 @@ const optionView = require('./optionView')
 module.exports = (props, options, pathLvl) => {
   let tempReturn = []
   for (let opID in options) {
-    tempReturn.push(optionView(props, options[opID], opID, pathLvl, getOptionType(opID, options, {opID, pathLvl, path: props.path})))
+    tempReturn.push(optionView(
+      props,
+      options[opID],
+      opID, pathLvl,
+      getOptionType(
+        opID,
+        options,
+        {opID, pathLvl, path: props.path}
+      )
+    ))
   }
   return (
     <View
