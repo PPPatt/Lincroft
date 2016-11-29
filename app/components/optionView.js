@@ -43,8 +43,6 @@ module.exports = (props, op, opID, pathLvl, opType) => {
             onPress={()=>{
               props.setModalProps({funcID: props.funcID, opID, pathLvl})
               props.switchVisible()
-              // props.addFunction(props.funcID, opID)
-              // props.setPath(pathLvl, opID)
             }}>
             <Text>{op.textOutput}</Text>
             <Text>{props.funcID}</Text>
