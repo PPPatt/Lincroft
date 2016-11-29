@@ -19,7 +19,8 @@ class ProjectLogicView extends Component {
     super(props)
     this.state = {
       allPaths: [],
-      currentPath: [], //TODO: Create Initial Path Generator
+      logicPath: props.initialPath,
+      selectedPath: [],
       ModalVisible_AddFunction: false,
       modalProps: {},
     }
@@ -56,9 +57,13 @@ class ProjectLogicView extends Component {
   }
 
   setPath(pathLvl, opID) {
-    let newPath = this.state.currentPath
-    newPath.splice(pathLvl, newPath.lenght, opID)
-    this.setState({currentPath: newPath})
+    let newPath = this.state.selectedPath
+    if(opID) {
+      newPath.splice(pathLvl, newPath.length+1, opID)
+    } else {
+      newPath.splice(pathLvl, newPath.length+1)
+    }
+    this.setState({selectedPath: newPath})
   }
 
   addFunction(func) {
@@ -89,12 +94,14 @@ class ProjectLogicView extends Component {
 
   iterateLayers(logic, funcID = 0, tempView = [], pathLvl = 0) {
     let newTempView = this.addLogicLayer(logic, funcID, tempView, pathLvl)
-    let nextFu = this.state.currentPath[pathLvl]?
-      this.state.allPaths[funcID][this.state.currentPath[pathLvl]]:
+    let nextFu = this.state.selectedPath[pathLvl]!==undefined?
+      this.state.allPaths[funcID][this.state.selectedPath[pathLvl]]:
       'nothingness' //FIXME
     if(typeof(nextFu)==='number') {
       return this.iterateLayers(logic, nextFu , newTempView, pathLvl+1)
-    } else {return newTempView}
+    } else {
+      return newTempView
+    }
   }
 
   addLogicLayer(logic, funcID, temp, pathLvl) {
@@ -104,10 +111,11 @@ class ProjectLogicView extends Component {
       {
         setPath: this.setPath.bind(this),
         addFunction: this.addFunction.bind(this),
-        path: this.state.currentPath,
+        selectedPath: this.state.selectedPath,
         funcID,
         switchVisible: this.switchVisible.bind(this),
-        setModalProps: this.setModalProps.bind(this)
+        setModalProps: this.setModalProps.bind(this),
+        logicPath: this.state.logicPath
       },
       fu.result,
       pathLvl
