@@ -41,6 +41,7 @@ module.exports = StyleSheet.create({
     backgroundColor: 'lightgreen',
     marginHorizontal: 15,
     height: 50 || null,
+    justifyContent: 'center',
     flex: 1,
   },
   optionViewFail: {
@@ -50,6 +51,7 @@ module.exports = StyleSheet.create({
     borderBottomLeftRadius: 9,
     borderBottomRightRadius: 9,
     height: 45 || null,
+    justifyContent: 'center',
     flex: 1,
   },
   optionViewDeadEnd: {
@@ -59,6 +61,7 @@ module.exports = StyleSheet.create({
     borderBottomLeftRadius: 9,
     borderBottomRightRadius: 9,
     height: 45 || null,
+    justifyContent: 'center',
     flex: 1,
   },
   outerBorder: {

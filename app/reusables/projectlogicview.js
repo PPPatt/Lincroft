@@ -12,6 +12,7 @@ const functionView = require('../components/functionView')
 const optionRowView = require('../components/optionRowView')
 const Modal = require('../reusables/modal')
 const AddFunction = require('../view/addfunction')
+const optionView = require('../components/optionView')
 
 class ProjectLogicView extends Component {
   constructor(props) {
@@ -81,7 +82,7 @@ class ProjectLogicView extends Component {
           null}
         {logic?
           this.iterateLayers(logic):
-          <Text>Project has no logic, add initilize logic functionality here</Text>}
+          this.addIntialFunction()}
       </ScrollView>
     )
   }
@@ -112,6 +113,21 @@ class ProjectLogicView extends Component {
       pathLvl
     ))
     return temp
+  }
+
+  addIntialFunction() {
+    return(
+      <View>
+        {optionView(
+          {
+            funcID: 0,
+            switchVisible: this.switchVisible.bind(this),
+            setModalProps: this.setModalProps.bind(this)
+          },
+          null, null, -1, 'initial'
+        )}
+      </View>
+    )
   }
 }
 
