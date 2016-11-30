@@ -49,7 +49,7 @@ const getOptionType = (opID, options, isSelectedArgs) => {
 }
 
 const isLogic = (logicPath, selectedPath, opID, pathLvl) => {
-  if(logicPath[0]) {
+  if(logicPath[0]!==undefined) {
     let tempSelectedPath = selectedPath.slice(0, pathLvl).concat([opID])
     let onLogicStreet = () => {
       for(let i = 0; i<pathLvl+1; i++) {

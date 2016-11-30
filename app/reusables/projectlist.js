@@ -41,7 +41,7 @@ class ProjectList extends Component {
             <View style = {{width:15}}/>
             <Text style={{textAlignVertical: 'center', fontSize: 25}}>{rowData.properties.title}</Text>
             <View style = {{flex:1}}/>
-            <Text style={{textAlignVertical: 'center', fontSize: 15}}>someKey: {rowData.someKey}</Text>
+            <Text style={{textAlignVertical: 'center', fontSize: 15}}>status: {rowData.status}</Text>
             <View style = {{width:15}}/>
           </View>
           <View style={{height: 10}}/>

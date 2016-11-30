@@ -39,7 +39,7 @@ class CreateNewProject extends Component {
               title: this.state.title,
               members: this.state.userList,
             },
-            someKey: 'someValue',
+            status: 'underConstruction',
           })
           this.props.switchVisible()
         }}>

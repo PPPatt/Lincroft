@@ -24,6 +24,10 @@ class ProjectOverview extends Component {
     return false
   }
 
+  run() {
+    console.warn('running')
+  }
+
   render() {
     return(
       <ViewContainer
@@ -41,6 +45,9 @@ class ProjectOverview extends Component {
             'no Members declared'}
         </Text>
         <View style={{flex:3}}/>
+        <Button onPress={this.run}>
+          Run this Mofo!
+        </Button>
         <Button onPress={()=>{this.props.navigator.push({id:'ProjectLogic', projID:this.props.projID})}}>
           Show Logic
         </Button>

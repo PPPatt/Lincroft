@@ -7,8 +7,9 @@ module.exports= (fu) => {
         opID = 0
       } else {opID = 1}
       return {op: fu.result[opID], opID}
-      break;
+    case 'survey':
+      return {op: fu.result[1], opID: 1} //FIXME: Default fail to op1
     default:
-      throw(fu.type + 'is not a valid function')
+      throw(fu.type + ' is not a valid function')
   }
 }

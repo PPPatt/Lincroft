@@ -11,11 +11,24 @@ module.exports = (props, fu, funcID) => {
         <View style={styles.innerContainer}>
           <Text>{fu.title?fu.title:'‘no title‘'}</Text>
           <Text>Type: {fu.type}</Text>
-          {fu.type==='deadline'?
-            <Text>Deadline: {fu.config.deadline}</Text>:
-            null}
+          {renderFuSpecs(fu)}
         </View>
       </View>
     </TouchableOpacity>
   )
+}
+
+const renderFuSpecs = (fu) => {
+  switch (fu.type) {
+    case 'deadline':
+      return(
+        <Text>Deadline: {fu.config.deadline}</Text>
+      )
+    case 'survey':
+      return(
+        <Text>{fu.config.surveyspecs.join(', ')}</Text>
+      )
+    default:
+
+  }
 }

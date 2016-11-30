@@ -1,6 +1,6 @@
 'use strict'
 import React, {Component} from 'react'
-import {Text, View} from 'react-native'
+import {Text, View, Alert} from 'react-native'
 
 const ReactRedux = require('react-redux')
 const store = require('../store')
@@ -62,6 +62,14 @@ class Splashpage extends Component {
         <Button onPress={()=>this.props.updateProjects()}>update Projects</Button>
         <Button onPress={()=>firebase.addProject(testProject)}>Firebase Add</Button>
         <Button onPress={()=>this.props.navigator.push({id:'Lobby'})}>goto Lobby</Button>
+        <Button onPress={()=>{
+          Alert.alert(
+           'Alert Title',
+           'alertMessage',
+         )
+          }}>
+          Alert me
+        </Button>
         <Text>auto get Projects from Server</Text>
       </View>
     )
