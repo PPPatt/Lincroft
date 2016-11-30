@@ -25,7 +25,9 @@ class ProjectOverview extends Component {
   }
 
   run() {
-    console.warn('running')
+    let newProject = this.props.project
+    newProject.status = 'active'
+    this.props.updateProject(this.props.projID, newProject)
   }
 
   render() {
@@ -72,6 +74,11 @@ const mapDispatchToProps = (dispatch) => {
         actions.updateProjects()
       )
     },
+    updateProject: (projID, proj) => {
+      store.dispatch(
+        actions.updateProject(projID, proj)
+      )
+    }
   }
 }
 

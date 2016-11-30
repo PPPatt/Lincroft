@@ -21,6 +21,13 @@ class ProjectList extends Component {
      })
   }
 
+  updateProject(projID, proj, opID) {
+    let newProj = proj
+    // newProj.properties.members[0].input = {} //TODO: FIX input location
+    // newProj.properties.members[0].input.surveyX = opID
+    // this.props.updateProject(projID, newProj)
+  }
+
   render() {
     return(
         <ListView

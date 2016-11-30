@@ -39,6 +39,19 @@ module.exports = {
     }
   },
 
+  updateProject: (projID, proj) => { //TODO: delete and add seems bulky for updating
+    return (dispatch, getState) => {
+      dispatch({
+        type:C.DELETE_PROJECTS,
+        projIDs: [projID]
+      }),
+      dispatch({
+        type:C.ADD_PROJECTS,
+        projects: [proj]
+      })
+    }
+  },
+
   addFunctionToProject: (projID, func, funcID, opID) => {
     return (dispatch, getState) => {
       dispatch({
