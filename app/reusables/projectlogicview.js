@@ -18,16 +18,10 @@ class ProjectLogicView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      allPaths: [],
-      logicPath: props.initialPath,
       selectedPath: [],
       ModalVisible_AddFunction: false,
       modalProps: {},
     }
-  }
-
-  componentWillMount() {
-    this.updatePathTree()
   }
 
   switchVisible() {
@@ -36,24 +30,6 @@ class ProjectLogicView extends Component {
 
   setModalProps(props) {
     this.setState({modalProps: props})
-  }
-
-  updatePathTree() {
-    const constructPathTree = (logic) => {
-      let tempReturn = []
-      for(let fuID in logic) {
-        let fu = logic[fuID]
-        let tempOps = []
-        for(let opID in fu.result) {
-          let op = fu.result[opID]
-          tempOps.push(op.action)
-        }
-        tempReturn.push(tempOps)
-      }
-      return tempReturn
-    }
-    let newPathTree = constructPathTree(this.props.project.logic)
-    this.setState({allPaths: newPathTree})
   }
 
   setPath(pathLvl, opID) {
@@ -68,11 +44,9 @@ class ProjectLogicView extends Component {
 
   addFunction(func) {
     this.props.addFunctionToProject(this.props.projID, func, this.state.modalProps.funcID, this.state.modalProps.opID)
-    this.updatePathTree()
   }
 
   render() {
-    let logic = this.props.project.logic
     return(
       <ScrollView style={styles.outerBorder}>
         {this.state.ModalVisible_AddFunction?
@@ -85,28 +59,28 @@ class ProjectLogicView extends Component {
               }}/>
           </Modal>:
           null}
-        {logic?
-          this.iterateLayers(logic):
+        {this.props.project.logic?
+          this.iterateLayers():
           this.addIntialFunction()}
       </ScrollView>
     )
   }
 
-  iterateLayers(logic, funcID = 0, tempView = [], pathLvl = 0) {
-    let newTempView = this.addLogicLayer(logic, funcID, tempView, pathLvl)
+  iterateLayers(funcID = 0, tempView = [], pathLvl = 0) {
+    let newTempView = this.addLogicLayer(funcID, tempView, pathLvl)
     let nextFu = this.state.selectedPath[pathLvl]!==undefined?
-      this.state.allPaths[funcID][this.state.selectedPath[pathLvl]]:
-      'nothingness' //FIXME
+      this.props.project.logic[funcID].options[this.state.selectedPath[pathLvl]].action:
+      'blab'
     if(typeof(nextFu)==='number') {
-      return this.iterateLayers(logic, nextFu , newTempView, pathLvl+1)
+      return this.iterateLayers(nextFu , newTempView, pathLvl+1)
     } else {
       return newTempView
     }
   }
 
-  addLogicLayer(logic, funcID, temp, pathLvl) {
-    let fu = logic[funcID]
-    temp.push(functionView({} , fu, funcID, ))
+  addLogicLayer(funcID, temp, pathLvl) {
+    let fu = this.props.project.logic[funcID]
+    temp.push(functionView({fu, funcID}))
     temp.push(optionRowView(
       {
         setPath: this.setPath.bind(this),
@@ -115,10 +89,10 @@ class ProjectLogicView extends Component {
         funcID,
         switchVisible: this.switchVisible.bind(this),
         setModalProps: this.setModalProps.bind(this),
-        logicPath: this.state.logicPath
-      },
-      fu.result,
-      pathLvl
+        options: fu.options,
+        pathLvl,
+        output: fu.output
+      }
     ))
     return temp
   }
@@ -130,9 +104,9 @@ class ProjectLogicView extends Component {
           {
             funcID: 0,
             switchVisible: this.switchVisible.bind(this),
-            setModalProps: this.setModalProps.bind(this)
-          },
-          null, null, -1, 'initial'
+            setModalProps: this.setModalProps.bind(this),
+            pathLvl: -1,
+          }
         )}
       </View>
     )

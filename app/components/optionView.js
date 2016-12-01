@@ -3,18 +3,18 @@ import React from 'react'
 import {TouchableOpacity, View, Text} from 'react-native'
 const styles = require('../reusables/styles')
 
-module.exports = (props, op, opID, pathLvl, opType, isLogic = false) => {
+module.exports = (args) => {
+  let opType = getOptionType(args.opID, args.options, args.pathLvl, args.selectedPath)
   switch (opType) {
     case 'initial':
       return(
         <View
-          key={0}
           style={{flex: 1, alignItemsHorizontal: 'center', flexDirection: 'row'}}>
           <TouchableOpacity
             style={styles.optionViewDeadEnd}
             onPress={()=>{
-              props.setModalProps({funcID: props.funcID, opID, pathLvl})
-              props.switchVisible()
+              args.setModalProps({funcID: args.funcID, opID: args.opID, pathLvl: args.pathLvl})
+              args.switchVisible()
             }}>
             <Text style={{textAlign: 'center'}}>Add new Function</Text>
           </TouchableOpacity>
@@ -24,13 +24,13 @@ module.exports = (props, op, opID, pathLvl, opType, isLogic = false) => {
     case 'selected':
       return(
         <View
-          key={'op'+opID.toString()}
+          key={'op'+args.opID.toString()}
           style={{flex: 1, alignItems: 'center', flexDirection: 'row'}}>
           <TouchableOpacity
             style={styles.optionViewSucsess}
-            onPress={()=>{props.setPath(pathLvl, null)}}>
-            <Text>{op.textOutput}</Text>
-            {isLogic?<Text style={{fontSize:25, textAlign: 'center'}}>V</Text>:null}
+            onPress={()=>{args.setPath(args.pathLvl, null)}}>
+            <Text>{args.options[args.opID].textOutput}</Text>
+            {args.output==args.opID?<Text style={{fontSize:25, textAlign: 'center'}}>V</Text>:null}
           </TouchableOpacity>
         </View>
       )
@@ -38,13 +38,13 @@ module.exports = (props, op, opID, pathLvl, opType, isLogic = false) => {
     case 'notSelected':
       return(
         <View
-          key={'op'+opID.toString()}
+          key={'op'+args.opID.toString()}
           style={{flex: 1, alignItemsHorizontal: 'center', flexDirection: 'row'}}>
           <TouchableOpacity
             style={styles.optionViewFail}
-            onPress={()=>{props.setPath(pathLvl, opID)}}>
-            <Text>{op.textOutput}</Text>
-            {isLogic?<Text style={{fontSize:25, textAlign: 'center'}}>V</Text>:null}
+            onPress={()=>{args.setPath(args.pathLvl, args.opID)}}>
+            <Text>{args.options[args.opID].textOutput}</Text>
+            {args.output==args.opID?<Text style={{fontSize:25, textAlign: 'center'}}>V</Text>:null}
           </TouchableOpacity>
         </View>
       )
@@ -52,16 +52,16 @@ module.exports = (props, op, opID, pathLvl, opType, isLogic = false) => {
     case 'deadend':
       return(
         <View
-          key={'op'+opID.toString()}
+          key={'op'+args.opID.toString()}
           style={{flex: 1, alignItemsHorizontal: 'center', flexDirection: 'row'}}>
           <TouchableOpacity
             style={styles.optionViewDeadEnd}
             onPress={()=>{
-              props.setModalProps({funcID: props.funcID, opID, pathLvl})
-              props.switchVisible()
+              args.setModalProps({funcID: args.funcID, opID: args.opID, pathLvl: args.pathLvl})
+              args.switchVisible()
             }}>
-            <Text>{op.textOutput}</Text>
-            {isLogic?<Text style={{fontSize:25, textAlign: 'center'}}>V</Text>:null}
+            <Text>{args.options[args.opID].textOutput}</Text>
+            {args.output==args.opID?<Text style={{fontSize:25, textAlign: 'center'}}>V</Text>:null}
           </TouchableOpacity>
         </View>
       )
@@ -70,5 +70,26 @@ module.exports = (props, op, opID, pathLvl, opType, isLogic = false) => {
       throw('unknown OptionView')
       return(<Text>Error?</Text>)
   }
+}
 
+const getOptionType = (opID, options, pathLvl, selectedPath) => {
+  if(pathLvl===-1) {return 'initial'}
+  let opAction = options[opID].action
+  if (typeof(opAction)==='number') {
+    if(isSelected(opID, pathLvl, selectedPath)) {
+      return 'selected'
+    } else {
+      return 'notSelected'
+    }
+  } else {
+    return 'deadend'
+  }
+}
+
+const isSelected = (opID, pathLvl, selectedPath) => {
+  if(selectedPath[pathLvl]!==undefined && selectedPath[pathLvl]!==null) {
+    if (selectedPath[pathLvl].toString()===opID.toString()) {
+      return true
+    } else {return false}
+  } else {return false}
 }

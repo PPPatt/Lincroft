@@ -35,10 +35,8 @@ class CreateNewProject extends Component {
         <Text>{this.state.userList.map((e)=>e.id).toString()}</Text>
         <Button onPress={()=>{
           firebase.addProject({
-            properties: {
-              title: this.state.title,
-              members: this.state.userList,
-            },
+            title: this.state.title,
+            members: this.state.userList,
             status: 'underConstruction',
           })
           this.props.switchVisible()

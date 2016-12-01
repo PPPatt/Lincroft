@@ -40,6 +40,7 @@ module.exports = {
   },
 
   updateProject: (projID, proj) => { //TODO: delete and add seems bulky for updating
+    let newProj = proj.status==='active'?recalculateAllOutputs(proj): proj
     return (dispatch, getState) => {
       dispatch({
         type:C.DELETE_PROJECTS,
@@ -47,7 +48,7 @@ module.exports = {
       }),
       dispatch({
         type:C.ADD_PROJECTS,
-        projects: [proj]
+        projects: [newProj]
       })
     }
   },
@@ -63,4 +64,21 @@ module.exports = {
       })
     }
   }
+}
+
+const recalculateAllOutputs = (proj) => { //TODO: probably make this into a dispatch
+  let outputs = []
+  for(let fuID in proj.logic) {
+    let output
+    let fu = proj.logic[fuID]
+    switch (fu.type) {
+      case 'deadline':
+        output = fu.config.deadline>1500?1:2
+        break
+      default:
+        output=fu.output
+    }
+    proj.logic[fuID].output = output
+  }
+  return proj
 }

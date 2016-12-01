@@ -10,7 +10,7 @@ const evaluateFunction = require('../reusables/evaluatefunction')
 
 class ProjectLogic extends Component {
   _onPressRight() {
-    fb.updateProject(this.props.projID, this.props.project)
+    fb.pushProject(this.props.projID, this.props.project)
   }
 
   evaluateProject() {
@@ -31,12 +31,12 @@ class ProjectLogic extends Component {
   render() {
     return(
       <ViewContainer
-        title={this.props.project.properties.title}
+        title={this.props.project.title}
         back={()=>{this.props.navigator.pop()}}
         rightButton={true}
         buttonTitle='submit'
         onPressRight={()=>{this._onPressRight()}}>
-        <ProjectLogicView projID={this.props.projID} initialPath={this.evaluateProject()}/>
+        <ProjectLogicView projID={this.props.projID}/>
       </ViewContainer>
     )
   }

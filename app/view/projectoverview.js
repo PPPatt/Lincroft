@@ -20,10 +20,6 @@ class ProjectOverview extends Component {
     this.props.navigator.pop()
   }
 
-  shouldComponentUpdate() { //FIXME: temporary fix to prevent warning when open project is being deleted
-    return false
-  }
-
   run() {
     let newProject = this.props.project
     newProject.status = 'active'
@@ -33,21 +29,21 @@ class ProjectOverview extends Component {
   render() {
     return(
       <ViewContainer
-        title={this.props.project.properties.title}
+        title={this.props.project.title}
         rightButton={true}
         buttonTitle='delete'
         onPressRight={()=>{this._onNavbarRightPressed()}}
         back={()=>this.props.navigator.pop()}
         style={{alignItems:'center'}}
         >
-        <Text style={{margin: 15}}>Title: {this.props.project.properties.title}</Text>
+        <Text style={{margin: 15}}>Title: {this.props.project.title}</Text>
         <Text>Members: {
-          this.props.project.properties.members?
-            this.props.project.properties.members.map((e)=>e.id).join(', '):
+          this.props.project.members?
+            this.props.project.members.map((e)=>e.id).join(', '):
             'no Members declared'}
         </Text>
         <View style={{flex:3}}/>
-        <Button onPress={this.run}>
+        <Button onPress={this.run.bind(this)}>
           Run this Mofo!
         </Button>
         <Button onPress={()=>{this.props.navigator.push({id:'ProjectLogic', projID:this.props.projID})}}>

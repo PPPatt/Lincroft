@@ -19,16 +19,32 @@ class AddFunction extends Component {
         return {
           title: 'placeholderfu',
           type: this.state.funcType,
-          status: 'inProgress',
+          output: null,
           config: {
             deadline: this.state.deadline, //FIXME: ADD ACTUAL TIME FORMAT
           },
-          result: [
+          options: [
+            {},
             {textOutput: ':) we are in time', action: 'resolve'},
             {textOutput: ':( we are out of time', action: 'archive'}
           ],
+          inputs: {},
         }
       case 'survey':
+        return {
+          title: 'placeholderfu',
+          type: this.state.funcType,
+          output: null,
+          config: {
+            surveyspecs: ['admincall']
+          },
+          options: [
+            {},
+            {textOutput: 'lets do it', action: 'resolve'},
+            {textOutput: 'näää', action: 'archive'}
+          ],
+        }
+      default:
         return {
           title: 'placeholderfu',
           type: this.state.funcType,
@@ -36,15 +52,13 @@ class AddFunction extends Component {
           config: {
             surveyspecs: ['admincall']
           },
-          result: [
-            {textOutput: 'lets do it', action: 'resolve'},
-            {textOutput: 'näää', action: 'archive'}
-          ],
+          options: [ {} ],
         }
-      default:
-
     }
+  }
 
+  isSubmitValid() { //TODO:
+    return true
   }
 
   render() {
@@ -53,32 +67,21 @@ class AddFunction extends Component {
         <Picker
           selectedValue={this.state.funcType}
           onValueChange={(type) => {
-            if(type==='someValue') {
               this.setState({
                 funcType: type,
-                canAdd: false
+                canAdd: this.isSubmitValid()
               })
-            } else {
-              this.setState({
-                funcType: type,
-                canAdd: true
-              })
-            }
             }}>
           <Picker.Item label="Deadline" value="deadline" />
           <Picker.Item label="Survey" value="survey" />
           <Picker.Item label="More to come" value="someValue" />
         </Picker>
         {this.renderFuncEditor(this.state.funcType)}
-        {this.state.canAdd?
-          <Button onPress={()=>{this.props.submitToState(this.createFunction(this.state.funcType))}}>
+        <Button
+          onPress={()=>{this.props.submitToState(this.createFunction(this.state.funcType))}}
+          disabled={!this.state.canAdd}>
           add
-          </Button>:
-          <Button
-            onPress={()=>{this.props.submitToState(this.createFunction())}}
-            disabled={true}>
-          add
-          </Button>}
+        </Button>
       </View>
     )
   }

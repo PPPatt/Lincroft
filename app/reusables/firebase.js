@@ -36,7 +36,7 @@ module.exports = {
       })
       .catch((e)=>console.warn(e))
   },
-  updateProject(projID, newProject) {
+  pushProject(projID, newProject) {
     let project = firebase.database().ref('projects/'+projID)
     project.set(newProject)
   }
